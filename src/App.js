@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import { Helmet } from "react-helmet";
+import {ThemeProvider} from "styled-components";
+import { darkTheme, lightTheme } from './styles/theme';
+import { GlobalStyle } from './styles/globalStyles';
+import Layout from './components/layout/Layout';
+import Routes from "./Routes";
 
-function App() {
+export const ThemeContext = React.createContext(null);
+
+const App = () => {
+    const [theme, setTheme]= useState("light"); 
+    const themeStyle = theme === "light" ? lightTheme : darkTheme;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ThemeContext.Provider value={{setTheme, theme}}>
+    <ThemeProvider theme={themeStyle}>
+        <GlobalStyle />
+        <Helmet>
+            <title>React Sidebar - by Aspasija</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Lobster&family=Roboto:wght@500;700&display=swap" rel="stylesheet"></link>
+        </Helmet>
+        <>
+            <Layout>
+                <Routes></Routes>
+            </Layout>
+        </>
+    </ThemeProvider>
+    </ThemeContext.Provider>
+  )
 }
 
-export default App;
+export default App
