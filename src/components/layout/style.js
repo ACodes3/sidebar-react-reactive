@@ -7,5 +7,9 @@ display: flex;
 `
 
 export const SMain = styled.main`
-padding: calc(${v.xxlSpacing} * 2);
+padding: calc(${v.smSpacingSpacing} * 2);
+
+h1 {
+    font-size: 14px;
+}
 `
